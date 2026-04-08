@@ -10,7 +10,7 @@ export const useSearchData = (query: string) => {
 };
 
 const searchData = async (query: string) => {
-    const response = await fetch(`http://www.omdbapi.com/?s=${query}&apikey=d592fe1a`);
+    const response = await fetch(`${import.meta.env.VITE_OMDB_API_KEY}/?s=${query}&apikey=d592fe1a`);
     const data = await response.json();
     return data.Search;
 };
