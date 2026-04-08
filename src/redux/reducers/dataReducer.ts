@@ -73,7 +73,7 @@ const dataReducer = (state = initialState, action: ActionType) => {
                 tanggal: action.payload.tanggal,
                 movieList: [
                     {
-                        judulFilm: action.payload.judulFilm.Title,
+                        judulFilm: judulFilm.Title,
                         jumlahTiket: Number(action.payload.jumlahTiket),
                         totalHarga: Number(action.payload.jumlahTiket) * Number(action.payload.harga),
                     },
