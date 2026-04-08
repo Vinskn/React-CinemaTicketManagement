@@ -10,6 +10,8 @@ const initialState: { data: HistoryType[] } = {
 const dataReducer = (state = initialState, action: ActionType) => {
     switch (action.type) {
         case "ADD_DATA":
+
+            if(!action.payload.judulFilm) return state;
             const searchItemIndex = state.data.findIndex(
                 (item: HistoryType) => item.tanggal === action.payload.tanggal,
             );

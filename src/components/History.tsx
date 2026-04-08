@@ -24,8 +24,8 @@ const History = () => {
             <p className="text-sm text-gray-700">Total Sepanjang Masa: {formatIDR(totalPenjualan)}</p>
             <p className="text-sm text-gray-700">Total Tiket Terjual: {totalTiket}</p>
             <div className="flex flex-col gap-4 mt-5">
-                {data.length > 0 && data.map((elm, idx) => (
-                    <CardHistory key={idx} tanggal={elm.tanggal} movieList={elm.movieList} />
+                {data.length > 0 && data.map((elm: HistoryType) => (
+                    <CardHistory key={elm.tanggal} tanggal={elm.tanggal} movieList={elm.movieList} />
                 ))}
             </div>
         </section>

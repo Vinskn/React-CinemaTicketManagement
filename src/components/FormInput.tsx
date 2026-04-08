@@ -13,7 +13,7 @@ const FormInput = () => {
     const { register, handleSubmit, control, reset, getValues } = useForm<FormType>();
     const [currentDate, setCurrentDate] = useState<string>('');
     const [searchQuery, setSearchQuery] = useState<string>('');
-    const { data, isLoading, error } = useSearchData(searchQuery);
+    const { data, isLoading, error, status } = useSearchData(searchQuery);
     const [price, setPrice] = useState<number>(0);
     const [notif, setNotif] = useState<boolean>(false);
     const dispatch = useDispatch();
@@ -58,7 +58,7 @@ const FormInput = () => {
 
     const handleSearch = () => {
         const title = getValues("judulSingle")        
-        setSearchQuery(title);
+        setSearchQuery(title || "");
     };   
 
     return (
@@ -87,6 +87,7 @@ const FormInput = () => {
 
                 {isLoading && <CircularProgress enableTrackSlot size="3rem" />}
                 {error && <Alert severity="error">{error.message}</Alert>}
+                {status === "success" && <Alert severity="success">Data ditemukan, silahkan pilih judul dibawah</Alert>}
 
                 <Controller
                     name="judulFilm"
