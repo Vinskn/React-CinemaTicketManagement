@@ -10,8 +10,9 @@ const initialState: { data: HistoryType[] } = {
 const dataReducer = (state = initialState, action: ActionType) => {
     switch (action.type) {
         case "ADD_DATA":
+            const judulFilm = action.payload.judulFilm;
+            if (!judulFilm) return state;
 
-            if(!action.payload.judulFilm) return state;
             const searchItemIndex = state.data.findIndex(
                 (item: HistoryType) => item.tanggal === action.payload.tanggal,
             );
@@ -20,18 +21,26 @@ const dataReducer = (state = initialState, action: ActionType) => {
             if (searchItemIndex !== -1) {
                 // cek judul film ada atau tidak
                 const searchTitleIndex = state.data[searchItemIndex].movieList.findIndex(
-                    (list: HistoryMovieList) => list.judulFilm === action.payload.judulFilm.Title,
+                    (list: HistoryMovieList) => list.judulFilm === judulFilm.Title,
                 );
+
                 if (searchTitleIndex !== -1) {
                     // kondisi kalau tanggal ada dan judul film ada -> update jumlah dan total harga
                     const theData = [...state.data];
+
+                    const item = theData[searchItemIndex];
+
+                    theData[searchItemIndex] = {
+                        ...item,
+                        movieList: [...item.movieList],
+                    };
+
                     theData[searchItemIndex].movieList[searchTitleIndex] = {
-                        judulFilm: action.payload.judulFilm.Title,
+                        judulFilm: judulFilm.Title,
                         jumlahTiket:
-                            Number(state.data[searchItemIndex].movieList[searchTitleIndex].jumlahTiket) +
-                            Number(action.payload.jumlahTiket),
+                            Number(item.movieList[searchTitleIndex].jumlahTiket) + Number(action.payload.jumlahTiket),
                         totalHarga:
-                            Number(state.data[searchItemIndex].movieList[searchTitleIndex].totalHarga) +
+                            Number(item.movieList[searchTitleIndex].totalHarga) +
                             Number(action.payload.jumlahTiket) * Number(action.payload.harga),
                     };
                     return {
@@ -47,7 +56,7 @@ const dataReducer = (state = initialState, action: ActionType) => {
                     movieList: [
                         ...theData[searchItemIndex].movieList,
                         {
-                            judulFilm: action.payload.judulFilm.Title,
+                            judulFilm: judulFilm.Title,
                             jumlahTiket: Number(action.payload.jumlahTiket),
                             totalHarga: Number(action.payload.jumlahTiket) * Number(action.payload.harga),
                         },
