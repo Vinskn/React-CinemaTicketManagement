@@ -19,7 +19,7 @@ const History = () => {
     }, 0);
 
     return (
-        <section className="container h-[90vh] overflow-y-auto">
+        <section className="custom-container h-[110vh] overflow-y-auto md:order-1">
             <h1 className="text-center text-lg font-bold mb-2">History Pembelian Tiket Bioskop</h1>
             <p className="text-sm text-gray-700">Total Sepanjang Masa: {formatIDR(totalPenjualan)}</p>
             <p className="text-sm text-gray-700">Total Tiket Terjual: {totalTiket}</p>

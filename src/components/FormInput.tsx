@@ -62,7 +62,7 @@ const FormInput = () => {
     };   
 
     return (
-        <section className="container md:order-2 relative">
+        <section className="custom-container md:order-2 relative">
             {notif && <Notif message="Data berhasil ditambahkan" status={true} setStatus={setNotif} />}
             
             <h1 className="text-center text-lg font-bold mb-5">Form Pembelian Tiket Bioskop</h1>
